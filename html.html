@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive List</title>
+    <style>
+        /* General reset and base styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f3f4f6;
+            color: #333;
+        }
+
+        /* Container styling */
+        .container {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Button styling */
+        #addButton {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #addButton:hover {
+            background-color: #0056b3;
+        }
+
+        /* List styling */
+        ul {
+            list-style-type: none;
+            margin-top: 20px;
+            padding: 0;
+        }
+
+        li {
+            background: #f8f9fa;
+            margin: 8px 0;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Delete button styling */
+        .deleteButton {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            font-size: 0.85rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .deleteButton:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>My Interactive List</h1>
+        <button id="addButton">Add Item</button>
+        <ul id="itemList"></ul>
+    </div>
+
+    <script>
+        // Select the button and the list
+        const addButton = document.getElementById('addButton');
+        const itemList = document.getElementById('itemList');
+
+        // Event listener for button click
+        addButton.addEventListener('click', function() {
+            // Prompt for user input
+            const userInput = prompt("Enter the information to add:");
+
+            // Check if input is empty or canceled
+            if (!userInput) {
+                alert("You must enter some information!");
+                return;
+            }
+
+            // Create a new list item with the input text
+            const listItem = document.createElement('li');
+            listItem.textContent = userInput;
+
+            // Create a delete button for the list item
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = "Delete";
+            deleteButton.className = "deleteButton";
+
+            // Add an event listener to delete the item when the delete button is clicked
+            deleteButton.addEventListener('click', function() {
+                itemList.removeChild(listItem);
+            });
+
+            // Append the delete button to the list item, then add list item to the list
+            listItem.appendChild(deleteButton);
+            itemList.appendChild(listItem);
+        });
+    </script>
+
+</body>
+</html>
